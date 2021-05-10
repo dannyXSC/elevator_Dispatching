@@ -1,0 +1,84 @@
+- unit_Interval: int        #单位时间
+- velocity: int             #每个单位时间移动多少次
+- waiting_Time: int         #在每个楼层停留多少单位时间
+
+Request
+- layer: int                #请求的层数
+- isUp: bool                #是向上还是向下
+
+Status
+- state: int                #0停止 1运行 2中停
+- remaining_Time: int       #如果正在中停，即state==2，表示中停的剩余单位时间 
+                            #如果正在向上或者向下,即state==1，表示到下一层剩余的单位时间
+
+Task
+- layer: int
+- in_Or_Out: int            #二进制数，11表示内外，10表示内部，01表示外部，00保存
+
+Elevator
+- layer: int                #所在层数，初始为0
+- operation_Direction       #运行的方向
+- cur_Status: Status        #状态        
+- button: {{layer_Num}:(T||F)}
+- stop_Task: [Task]         #停止队列，会在中途哪里停下
+- add_Stop_Layer() ->void   #电梯增加中停层
+- step() -> int             #走一步(走一层)，返回当前状态
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
+- target_Layer: int         #目标层数 x我觉得当前方向更好？
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Elevator_List
+- list: [Elevator]          #电梯的列表s
+- wait_Queue: [Request] #总的等待队列   x我觉得上行队列和下行队列应该分开
+- distribute() -> void      #每次循环的最后，开始为等待队列里的request分配电梯
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Floor
+- layer: int                #所在层数
+- up_Button_State: bool     #上行键状态
+- down_Button_State: bool   #下行键状态
+
+Building
+- layers: [Floor]
+- elevators: Elevator_List
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- 我认为一个人在一个楼层按了上行或者下行键，对于电梯组来说，就是要派一个电梯到这一楼。
+  所以设计了target_layer，表示这个电梯最终要到达的位置。
+  - 那比如现在电梯在10楼，有人在2楼按了电梯，这个时候电梯的target_layer就改成了2。此时，
+    如果有人在电梯里按了1，我认为这个时候电梯的target_layer就==不应该==变为1。
+  - 也就是说，我暂时不接受interrupt
+- 但是我的类的设计实际上不用考虑这些东西，我只需要考虑清楚，有关内容是否都存上了。
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- 运行的方向不能随意更改
