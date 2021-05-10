@@ -1,0 +1,12 @@
+Request
+- layer: int            #请求的层数
+- isUp: bool            #是向上还是向下
+
+Elevator
+- layer: int            #所在层数，初始为0
+- waitQue: [Request]    #等待队列
+- state: int            #电梯的状态
+
+Elevator_List
+- list: [Elevator]      #电梯的列表
+- waitQue: [Request]    #总的等待队列
