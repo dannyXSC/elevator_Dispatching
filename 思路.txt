@@ -1,12 +1,22 @@
+- unit_Interval: int    #单位时间
+- velocity: int         #每个单位时间移动多少次
+- waiting_Time: int     #在每个楼层停留多少时间
+
+
 Request
 - layer: int            #请求的层数
 - isUp: bool            #是向上还是向下
 
 Elevator
 - layer: int            #所在层数，初始为0
-- waitQue: [Request]    #等待队列
-- state: int            #电梯的状态
+- target_Layer: int     #目标层数
+- state: int            #电梯的状态，类似于信号量?也就是说state为1的时候就是停着的，小于等于0的时候就是被占用着的
+- stop_Queue: [int]     #停止队列，会在中途哪里停下
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Elevator_List
-- list: [Elevator]      #电梯的列表
-- waitQue: [Request]    #总的等待队列
+- list: [Elevator]      #电梯的列表s
+- wait_Queue: [Request] #总的等待队列
+- distribute() -> void  #每次循环的最后，开始为等待队列里的request分配电梯
