@@ -28,8 +28,11 @@ Elevator
 - stop_Task: dict()
 - add_Stop_Task() -> void   #电梯增加中停层，电梯已经运行起来了
 - call() -> void
-- step() -> int             #走一步(走一个单位时间)，返回当前状态
 - button_Click() -> void
+- step() -> Status          #走一步(走一个单位时间)，返回当前状态
+- open_Click() -> void
+- close_Click() -> void
+- alarm_Click() -> void
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
