@@ -27,7 +27,7 @@ Elevator
 - button: {{layer_Num}:(T||F)}
 - stop_Task: dict()
 - add_Stop_Task() ->void    #电梯增加中停层
-- step() -> int             #走一步(走一层)，返回当前状态
+- step() -> Status          #走一步(走一层)，返回当前状态
 - open_Click() -> void
 - close_Click() -> void
 - alarm_Click() -> void
