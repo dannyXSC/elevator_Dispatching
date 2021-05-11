@@ -1,5 +1,5 @@
 - unit_Interval: int        #单位时间
-- velocity: int             #每个单位时间移动多少次
+- velocity: int             #几个单位时间移动一层
 - waiting_Time: int         #在每个楼层停留多少单位时间
 - max_Layer: int            #最大楼层数
 - min_Layer: int            #最小楼层数
@@ -22,12 +22,14 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Elevator
 - layer: int                #所在层数，初始为0
-- operation_Direction       #运行的方向
+- operation_Direction       #运行的方向 0代表没有方向 1代表向上 2代表向下
 - cur_Status: Status        #状态        
 - button: {{layer_Num}:(T||F)}
 - stop_Task: dict()
-- add_Stop_Task() ->void    #电梯增加中停层
-- step() -> int             #走一步(走一层)，返回当前状态
+- add_Stop_Task() -> void   #电梯增加中停层，电梯已经运行起来了
+- call() -> void
+- step() -> int             #走一步(走一个单位时间)，返回当前状态
+- button_Click() -> void
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列

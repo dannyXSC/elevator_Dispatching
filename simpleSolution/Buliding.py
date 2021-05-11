@@ -10,3 +10,6 @@ class Building():
                  n=default_Elevator_Number):
         self.layers = [Floor(i) for i in range(minL, maxL + 1)]
         self.elevators = Elevator_Group(minL, n)
+
+    def run():
+        pass
