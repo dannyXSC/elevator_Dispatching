@@ -1,24 +1,19 @@
 - unit_Interval: int        #单位时间
 - velocity: int             #每个单位时间移动多少次
 - waiting_Time: int         #在每个楼层停留多少单位时间
-- max_Layer: int            #最大楼层数
-- min_Layer: int            #最小楼层数
-- default_Elevator_Number   #默认电梯数
 
 Request
 - layer: int                #请求的层数
-- is_Up: bool               #是向上还是向下
+- isUp: bool                #是向上还是向下
 
 Status
 - state: int                #0停止 1运行 2中停
 - remaining_Time: int       #如果正在中停，即state==2，表示中停的剩余单位时间 
                             #如果正在向上或者向下,即state==1，表示到下一层剩余的单位时间
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Task
 - layer: int
 - in_Or_Out: int            #二进制数，11表示内外，10表示内部，01表示外部，00保存
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Elevator
 - layer: int                #所在层数，初始为0
@@ -35,15 +30,12 @@ Elevator
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
 - target_Layer: int         #目标层数 x我觉得当前方向更好？
-- stop_Task: [Task]         #停止队列，会在中途哪里停下
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-Elevator_Group
+Elevator_List
 - list: [Elevator]          #电梯的列表s
 - wait_Queue: [Request] #总的等待队列   x我觉得上行队列和下行队列应该分开
 - distribute() -> void      #每次循环的最后，开始为等待队列里的request分配电梯
-- step() -> void
-- add_Request() ->void
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -56,8 +48,8 @@ Floor
 Building
 - layers: [Floor]
 - elevators: Elevator_List
+- listener?
 
-Listener?
 
 
 
