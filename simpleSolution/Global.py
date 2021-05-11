@@ -1,9 +1,9 @@
 # 单位时间
 unit_Interval = 1
 # 几个单位时间移动一层
-velocity = 100
+velocity = 50
 # 在每个楼层停留多少时间
-waiting_Time = 100
+waiting_Time = 50
 # 最大楼层数
 max_Layer = 20
 # 最小楼层数
@@ -26,10 +26,13 @@ display_Elevator_Button_Font_Color_Active = (255, 0, 0)
 display_Elevator_Button_Bcolor = (0, 0, 0)
 
 display_Elevator_Button_Xstart = 500
-display_Elevator_Button_Ystart = 500
+display_Elevator_Button_Ystart = 600
 
 display_Elevator_Button_Width = 50
 display_Elevator_Button_Height = 50
 
 display_Elevator_Button_Vmargin = 20
 display_Elevator_Button_Hmargin = 20
+
+display_elevator_Width = 50
+display_elevator_Height = 50
