@@ -18,11 +18,14 @@ Task
 Elevator
 - layer: int                #所在层数，初始为0
 - operation_Direction       #运行的方向
-- cur_Status: Status        #状态        
-- button: {{layer_Num}:(T||F)}
+- cur_Status: Status        #状态
+- layer_Button: {{layer_Num}:(T||F)}
 - stop_Task: [Task]         #停止队列，会在中途哪里停下
 - add_Stop_Layer() ->void   #电梯增加中停层
 - step() -> int             #走一步(走一层)，返回当前状态
+- open_Click() -> void
+- close_Click() -> void
+- alarm_Click() -> void
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
@@ -45,7 +48,7 @@ Floor
 Building
 - layers: [Floor]
 - elevators: Elevator_List
-
+- listener?
 
 
 
