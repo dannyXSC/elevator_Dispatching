@@ -1,4 +1,4 @@
-from Global import *
+ from Global import *
 
 
 class Floor():
