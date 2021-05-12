@@ -57,3 +57,10 @@ display_Elevator_Group_Elevator_Button_Hmargin = 20
 display_Elevator_Group_Elevator_Button_Vmargin = 20
 
 display_Elevator_Group_Elevator_Button_Group_Hmargin = 20
+
+# Floor
+display_Floor_Button_Width = display_Elevator_Group_Floor_Height // 2
+display_Floor_Button_Height = display_Elevator_Group_Floor_Height // 2
+
+display_Floor_Button_Hmargin = 10
+display_Floor_Button_Vmargin = 10

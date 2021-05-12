@@ -53,7 +53,6 @@ class Elevator():
             raise Exception("Call elevator failure!")
 
     def step(self):
-
         is_Arrive = False
         if self.status.state == 0:
             # 停止状态
