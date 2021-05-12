@@ -240,13 +240,13 @@ def Elevator_Group_Render(elevator_Number=default_Elevator_Number,
             raise Exception("Invalid input!")
 
     icon = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
+        r'./img/smiling.png')
     elevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png',
+        r'./img/elevator.png',
         (display_Elevator_Group_Elevator_Width,
          display_Elevator_Group_Elevator_Height))
     openedElevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png',
+        r'./img/opened_Elevator.png',
         (display_Elevator_Group_Elevator_Width,
          display_Elevator_Group_Elevator_Height))
 
@@ -319,7 +319,8 @@ def Elevator_Group_Render(elevator_Number=default_Elevator_Number,
             PosGroup.append(calOneAuxiliaryButtonGroupPos(x, y, i))
         return PosGroup
 
-    ButtonStartX = display_Elevator_Group_Elevator_Width * elevator_Number + display_Elevator_Group_Floor_Width + 50
+    ButtonStartX = display_Elevator_Group_Elevator_Width * \
+        elevator_Number + display_Elevator_Group_Floor_Width + 50
 
     # 所有按钮的位置信息
     allNButtonGroupPos = calAllButtonGroupPos(

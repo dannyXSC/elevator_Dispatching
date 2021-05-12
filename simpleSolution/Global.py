@@ -5,11 +5,11 @@ velocity = 20
 # 在每个楼层停留多少时间
 waiting_Time = 20
 # 最大楼层数
-max_Layer = 20
+max_Layer = 10
 # 最小楼层数
 min_Layer = 1
 # 默认电梯数
-default_Elevator_Number = 5
+default_Elevator_Number = 3
 # 运行时电梯可召唤最小距离
 min_Running_Distance = 2
 
