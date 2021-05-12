@@ -4,7 +4,7 @@ from Request import Request
 
 
 class Elevator_Group():
-    def __init__(self, l=min_Layer, n=default_Elevator_Number):
+    def __init__(self, l=max_Layer, n=default_Elevator_Number):
         self.list = [Elevator(l) for x in range(n)]
         self.wait_Queue = list()
 
