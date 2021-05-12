@@ -177,63 +177,67 @@ class Elevator():
     def alarm_Click(self):
         pass
 
-    def can_Add_Task(self, l):
-        if not isinstance(l, int) or l < min_Layer or l > max_Layer:
-            raise Exception("Invalid input!")
-        if l in self.stop_Task:
-            return False
-        if self.status.state == 0:
-            return True
-        elif self.status.state == 2:
-            if self.operation_Direction == 0 or (
-                    self.operation_Direction == 1
-                    and l >= self.layer) or (self.operation_Direction == 2
-                                             and l <= self.layer):
-                return True
-            else:
+    def can_Add_Task(self, l, direction=None):
+        if direction == None:
+            if not isinstance(l, int) or l < min_Layer or l > max_Layer:
+                raise Exception("Invalid input!")
+            if l in self.stop_Task:
                 return False
-        else:
-            if self.operation_Direction == 1:
-                if l >= self.layer + min_Running_Distance:
-                    return True
-                else:
-                    return False
-            elif self.operation_Direction == 2:
-                if l <= self.layer - min_Running_Distance:
+            if self.status.state == 0:
+                return True
+            elif self.status.state == 2:
+                if self.operation_Direction == 0 or (
+                        self.operation_Direction == 1
+                        and l >= self.layer) or (self.operation_Direction == 2
+                                                 and l <= self.layer):
                     return True
                 else:
                     return False
             else:
-                # When operation_Direction == 0, self.status.state == 0
-                raise Exception("Error!")
+                if self.operation_Direction == 1:
+                    if l >= self.layer + min_Running_Distance:
+                        return True
+                    else:
+                        return False
+                elif self.operation_Direction == 2:
+                    if l <= self.layer - min_Running_Distance:
+                        return True
+                    else:
+                        return False
+                else:
+                    # When operation_Direction == 0, self.status.state == 0
+                    raise Exception("Error!")
+        else:
+            # direction 1 向上 2向下
+            if not isinstance(l, int) or l < min_Layer or l > max_Layer:
+                raise Exception("Invalid input!")
+            if self.status.state == 0:
+                return True
+            elif self.status.state == 2:
+                if self.operation_Direction == 0 or (
+                        self.operation_Direction == 1 and l >= self.layer
+                        and direction == 1) or (self.operation_Direction == 2
+                                                and l <= self.layer
+                                                and direction == 2):
+                    return True
+                else:
+                    return False
+            else:
+                if self.operation_Direction == 1 and direction == 1:
+                    if l >= self.layer + min_Running_Distance:
+                        return True
+                    else:
+                        return False
+                elif self.operation_Direction == 2 and direction == 2:
+                    if l <= self.layer - min_Running_Distance:
+                        return True
+                    else:
+                        return False
+                else:
+                    return False
 
-    def can_Add_Task(self, l, direction):
-        # direction 1 向上 2向下
-        if not isinstance(l, int) or l < min_Layer or l > max_Layer:
-            raise Exception("Invalid input!")
-        if self.status.state == 0:
-            return True
-        elif self.status.state == 2:
-            if self.operation_Direction == 0 or (
-                    self.operation_Direction == 1
-                    and l >= self.layer and direction == 1) or (self.operation_Direction == 2
-                                                                and l <= self.layer and direction == 2):
-                return True
-            else:
-                return False
-        else:
-            if self.operation_Direction == 1 and direction == 1:
-                if l >= self.layer + min_Running_Distance:
-                    return True
-                else:
-                    return False
-            elif self.operation_Direction == 2 and direction == 2:
-                if l <= self.layer - min_Running_Distance:
-                    return True
-                else:
-                    return False
-            else:
-                return False
+    def get_Button_State(self):
+        return self.button[1:]
 
 
 if __name__ == '__main__':

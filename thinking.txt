@@ -37,6 +37,7 @@ Elevator
 - can_Stop() -> bool        #判断电梯当前是否能停下
 - button_Restoration() -> void #复位
 - can_Add_Task() -> bool
+- get_Button_State -> list(bool)
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - wait_Queue: [Request] #等待队列 x我觉得电梯里不需要等待队列
@@ -46,7 +47,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Elevator_Group
 - list: [Elevator]          #电梯的列表s
-- wait_Queue: [Request] #总的等待队列   x我觉得上行队列和下行队列应该分开
+- wait_Queue: [Request]     #总的等待队列   
 - distribute() -> void      #每次循环的最后，开始为等待队列里的request分配电梯
 - step() -> void
 - add_Request() ->void
