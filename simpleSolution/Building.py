@@ -1,3 +1,4 @@
+from Request import Request
 from Global import *
 from Floor import Floor
 from Elevator_Group import Elevator_Group
@@ -11,15 +12,19 @@ class Building():
     def step(self):
         self.distribute()
         for elevator in self.elevators.list:
-            state = elevator.step()
-            if state == True:
-                if elevator.operation_Direction == 1:
-                    self.layers[elevator.layer - 1].up_Button_State = False
-                elif elevator.operation_Direction == 2:
-                    self.layers[elevator.layer - 1].down_Button_State = False
+            request = elevator.step()
+            if isinstance(request, Request):
+                if request.is_Up == True:
+                    self.layers[request.layer - 1].up_Button_State = False
                 else:
-                    # TODO: 如果在同一层按的按钮怎么办
-                    pass
+                    self.layers[request.layer - 1].down_Button_State = False
+                # if elevator.operation_Direction == 1:
+                #     self.layers[elevator.layer - 1].up_Button_State = False
+                # elif elevator.operation_Direction == 2:
+                #     self.layers[elevator.layer - 1].down_Button_State = False
+                # else:
+                #     #
+                #     pass
 
     def distribute(self):
         # 从所有的等待队列中，选出
@@ -34,9 +39,11 @@ class Building():
                 if picked[i] == False and elevator.can_Add_Task(
                         layer, direction):
                     if elevator.status.state == 0:
-                        elevator.call(layer, True)
+                        elevator.call(layer, True,
+                                      self.elevators.wait_Queue[i])
                     else:
-                        elevator.add_Stop_Task(layer, True)
+                        elevator.add_Stop_Task(layer, True,
+                                               self.elevators.wait_Queue[i])
                     complete_List.append(self.elevators.wait_Queue[i])
                     picked[i] = True
 
