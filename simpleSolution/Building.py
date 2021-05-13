@@ -12,6 +12,7 @@ class Building():
 
     def step(self):
         self.distribute()
+        print(self.solving_Request)
         for elevator in self.elevators.list:
             request = elevator.step()
             if isinstance(request, Request):
