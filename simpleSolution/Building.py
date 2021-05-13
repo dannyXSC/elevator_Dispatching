@@ -6,8 +6,11 @@ from Elevator_Group import Elevator_Group
 
 class Building():
     def __init__(self, layer_Number=max_Layer, n=default_Elevator_Number):
+        self.elevator_Number = n
         self.layers = [Floor(i) for i in range(layer_Number)]
         self.elevators = Elevator_Group(layer_Number, n)
+        self.qualification = dict()
+        # self.rigister = dict()
 
     def step(self):
         self.distribute()
@@ -35,18 +38,32 @@ class Building():
             layer = self.elevators.wait_Queue[i].layer
             is_Up = self.elevators.wait_Queue[i].is_Up
             direction = 1 if is_Up == True else 2
-            for elevator in self.elevators.list:
-                if picked[i] == False and elevator.can_Add_Task(
-                        layer, direction):
-                    if elevator.status.state == 0:
-                        elevator.call(layer, True,
-                                      self.elevators.wait_Queue[i])
+            for j in range(self.elevator_Number):
+                if self.elevators.list[j].can_Add_Task(layer, direction):
+                    if i not in self.qualification:
+                        self.qualification[i] = [j]
                     else:
-                        elevator.add_Stop_Task(layer, True,
-                                               self.elevators.wait_Queue[i])
-                    complete_List.append(self.elevators.wait_Queue[i])
-                    picked[i] = True
-
+                        self.qualification[i].append(j)
+        for request in self.qualification:
+            request_Layer = self.elevators.wait_Queue[request].layer
+            minDistance = len(self.layers)+5
+            pick_Elevator = -1
+            for j in range(self.elevator_Number):
+                if abs(request_Layer-self.elevators.list[j].layer) < minDistance:
+                    minDistance = abs(
+                        request_Layer-self.elevators.list[j].layer)
+                    pick_Elevator = j
+            if pick_Elevator < 0:
+                raise Exception("Error!")
+            complete_List.append(self.elevators.wait_Queue[request])
+            # self.rigister[self.elevators.wait_Queue[request]] = pick_Elevator
+            if self.elevators.list[pick_Elevator].status.state == 0:
+                self.elevators.list[pick_Elevator].call(layer, True,
+                                                        self.elevators.wait_Queue[request])
+            else:
+                self.elevators.list[pick_Elevator].add_Stop_Task(layer, True,
+                                                                 self.elevators.wait_Queue[request])
+        self.qualification = dict()
         try:
             for complete in complete_List:
                 if complete in self.elevators.wait_Queue:
@@ -56,4 +73,5 @@ class Building():
 
     def add_Request(self, request):
         # 暂时的请求都按到来的顺序存在list中
-        self.elevators.wait_Queue.append(request)
+        if request not in self.elevators.wait_Queue:
+            self.elevators.wait_Queue.append(request)
