@@ -314,7 +314,8 @@ def Elevator_Group_Render(elevator_Number=default_Elevator_Number,
             PosGroup.append(calOneAuxiliaryButtonGroupPos(x, y, i))
         return PosGroup
 
-    ButtonStartX = display_Elevator_Group_Elevator_Width * elevator_Number + display_Elevator_Group_Floor_Width + 50
+    ButtonStartX = display_Elevator_Group_Elevator_Width * \
+        elevator_Number + display_Elevator_Group_Floor_Width + 50
 
     # 所有按钮的位置信息
     allNButtonGroupPos = calAllButtonGroupPos(
@@ -718,7 +719,8 @@ def Building_Render(elevator_Number=default_Elevator_Number,
     #######################################################################
     def calFloorButtonPos():
         retPos = list()
-        Xstart = display_Elevator_Group_Elevator_Width * elevator_Number + display_Elevator_Group_Floor_Width + display_Floor_Button_Hmargin
+        Xstart = display_Elevator_Group_Elevator_Width * elevator_Number + \
+            display_Elevator_Group_Floor_Width + display_Floor_Button_Hmargin
         for i in range(Layer_Number):
             Ythis = screen_Height - (
                 i + 1
@@ -727,7 +729,7 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                            [
                                Xstart + display_Floor_Button_Width +
                                display_Floor_Button_Hmargin, Ythis
-                           ]])
+            ]])
         return retPos
 
     FloorButtonPos = calFloorButtonPos()
@@ -737,14 +739,13 @@ def Building_Render(elevator_Number=default_Elevator_Number,
     #######################################################################
     def showFloorButton(active_List):
         for i in range(Layer_Number):
-            if i !=Layer_Number-1:
+            if i != Layer_Number-1:
                 showButton("^", FloorButtonPos[i][0][0], FloorButtonPos[i][0][1],
-                        active_List[i][0], display_Floor_Button_Width,
-                        display_Floor_Button_Height)
+                           active_List[i][0], display_Floor_Button_Width,
+                           display_Floor_Button_Height)
             if i != 0:
-                showButton("v", FloorButtonPos[i][1][0],
-                           FloorButtonPos[i][1][1], active_List[i][1],
-                           display_Floor_Button_Width,
+                showButton("v", FloorButtonPos[i][1][0], FloorButtonPos[i][1][1],
+                           active_List[i][1], display_Floor_Button_Width,
                            display_Floor_Button_Height)
 
     #######################################################################
@@ -817,21 +818,21 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                     if flag == 0:
                         # 监听楼层按钮
                         for i in range(Layer_Number):
-                            if ifClickButton(cursorsPos[0], cursorsPos[1],
-                                             FloorButtonPos[i][0][0],
-                                             FloorButtonPos[i][0][1],
-                                             display_Floor_Button_Width,
-                                             display_Floor_Button_Height):
+                            if i != Layer_Number-1 and ifClickButton(cursorsPos[0], cursorsPos[1],
+                                                                     FloorButtonPos[i][0][0],
+                                                                     FloorButtonPos[i][0][1],
+                                                                     display_Floor_Button_Width,
+                                                                     display_Floor_Button_Height):
                                 buildingHandle.layers[i].up_Button_State = True
                                 buildingHandle.add_Request(Request(
                                     i + 1, True))
                                 flag = 1
                                 break
-                            elif ifClickButton(cursorsPos[0], cursorsPos[1],
-                                               FloorButtonPos[i][1][0],
-                                               FloorButtonPos[i][1][1],
-                                               display_Floor_Button_Width,
-                                               display_Floor_Button_Height):
+                            elif i != 0 and ifClickButton(cursorsPos[0], cursorsPos[1],
+                                                          FloorButtonPos[i][1][0],
+                                                          FloorButtonPos[i][1][1],
+                                                          display_Floor_Button_Width,
+                                                          display_Floor_Button_Height):
                                 buildingHandle.layers[
                                     i].down_Button_State = True
                                 buildingHandle.add_Request(
