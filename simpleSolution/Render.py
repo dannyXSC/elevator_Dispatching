@@ -17,15 +17,11 @@ def Single_Elevator_Render():
     screen_Height = max_Layer * display_elevator_Height
     screen = pygame.display.set_mode((screen_Width, screen_Height))
     pygame.display.set_caption("Elevator")
-    icon = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
+    icon = pygame.image.load(r'.\img\smiling.png')
     pygame.display.set_icon(icon)
 
-    elevatorImg = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png')
-    openedElevatorImg = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png'
-    )
+    elevatorImg = pygame.image.load(r'.\img\elevator.png')
+    openedElevatorImg = pygame.image.load(r'.\img\opened_Elevator.png')
     elevatorImg = pygame.transform.scale(
         elevatorImg, (display_elevator_Width, display_elevator_Height))
     openedElevatorImg = pygame.transform.scale(
@@ -241,16 +237,13 @@ def Elevator_Group_Render(elevator_Number=default_Elevator_Number,
         else:
             raise Exception("Invalid input!")
 
-    icon = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
-    elevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
-    openedElevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
+    icon = load_img(r'.\img\smiling.png')
+    elevatorImg = load_img(r'.\img\elevator.png',
+                           (display_Elevator_Group_Elevator_Width,
+                            display_Elevator_Group_Elevator_Height))
+    openedElevatorImg = load_img(r'.\img\opened_Elevator.png',
+                                 (display_Elevator_Group_Elevator_Width,
+                                  display_Elevator_Group_Elevator_Height))
 
     pygame.display.set_icon(icon)
 
@@ -531,16 +524,13 @@ def Building_Render(elevator_Number=default_Elevator_Number,
         else:
             raise Exception("Invalid input!")
 
-    icon = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
-    elevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
-    openedElevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
+    icon = load_img(r'.\img\smiling.png')
+    elevatorImg = load_img(r'.\img\elevator.png',
+                           (display_Elevator_Group_Elevator_Width,
+                            display_Elevator_Group_Elevator_Height))
+    openedElevatorImg = load_img(r'.\img\opened_Elevator.png',
+                                 (display_Elevator_Group_Elevator_Width,
+                                  display_Elevator_Group_Elevator_Height))
 
     pygame.display.set_icon(icon)
 
@@ -747,12 +737,15 @@ def Building_Render(elevator_Number=default_Elevator_Number,
     #######################################################################
     def showFloorButton(active_List):
         for i in range(Layer_Number):
-            showButton("^", FloorButtonPos[i][0][0], FloorButtonPos[i][0][1],
-                       active_List[i][0], display_Floor_Button_Width,
-                       display_Floor_Button_Height)
-            showButton("v", FloorButtonPos[i][1][0], FloorButtonPos[i][1][1],
-                       active_List[i][1], display_Floor_Button_Width,
-                       display_Floor_Button_Height)
+            if i !=Layer_Number-1:
+                showButton("^", FloorButtonPos[i][0][0], FloorButtonPos[i][0][1],
+                        active_List[i][0], display_Floor_Button_Width,
+                        display_Floor_Button_Height)
+            if i != 0:
+                showButton("v", FloorButtonPos[i][1][0],
+                           FloorButtonPos[i][1][1], active_List[i][1],
+                           display_Floor_Button_Width,
+                           display_Floor_Button_Height)
 
     #######################################################################
     # run

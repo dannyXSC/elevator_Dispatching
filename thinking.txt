@@ -124,4 +124,5 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 调度算法思考：
-- 我的第一版做的是
+- 我的第一版做的是从最左边的电梯到最右边的电梯循环，看这个电梯可不可以接这个任务
+  如果可以接，那么就接这个任务。

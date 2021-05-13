@@ -8,6 +8,8 @@ class Building():
     def __init__(self, layer_Number=max_Layer, n=default_Elevator_Number):
         self.layers = [Floor(i) for i in range(layer_Number)]
         self.elevators = Elevator_Group(layer_Number, n)
+        self.qualification = dict()
+        self.register = dict()
 
     def step(self):
         self.distribute()
@@ -56,4 +58,5 @@ class Building():
 
     def add_Request(self, request):
         # 暂时的请求都按到来的顺序存在list中
-        self.elevators.wait_Queue.append(request)
+        if request not in self.elevators.wait_Queue:
+            self.elevators.wait_Queue.append(request)
