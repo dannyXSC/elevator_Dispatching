@@ -13,25 +13,28 @@ class Elevator():
         self.status = Status(0, 0)
         self.button = [False for x in range(max_Layer + 1)]
         self.stop_Task = dict()
+        self.Request = dict()
 
-    def add_Stop_Task(self, l, is_Out):
+    def add_Stop_Task(self, l, is_Out, request=None):
         if not isinstance(l, int) or not isinstance(is_Out, bool):
             raise Exception("Invalid input!")
         try:
             if l in self.stop_Task:
                 if is_Out == True:
                     self.stop_Task[l] = self.stop_Task[l] | 1
+                    self.Request[l] = request
                 else:
                     self.stop_Task[l] = self.stop_Task[l] | (1 << 1)
             else:
                 if is_Out == True:
                     self.stop_Task[l] = 1
+                    self.Request[l] = request
                 else:
                     self.stop_Task[l] = (1 << 1)
         except:
             raise Exception("Add Stop Task failure!")
 
-    def call(self, l, is_Out):
+    def call(self, l, is_Out, request=None):
         if not isinstance(l, int) or l < min_Layer or l > max_Layer:
             raise Exception("Invalid input!")
         try:
@@ -39,25 +42,26 @@ class Elevator():
                 self.status.state = 2
                 self.status.remaining_Time = waiting_Time
                 self.operation_Direction = 0
+                if is_Out == True:
+                    self.add_Stop_Task(l, is_Out, request)
             elif l > self.layer:
                 self.status.state = 1
                 self.status.remaining_Time = velocity
                 self.operation_Direction = 1
-                self.add_Stop_Task(l, is_Out)
+                self.add_Stop_Task(l, is_Out, request)
             else:
                 self.status.state = 1
                 self.status.remaining_Time = velocity
                 self.operation_Direction = 2
-                self.add_Stop_Task(l, is_Out)
+                self.add_Stop_Task(l, is_Out, request)
         except:
             raise Exception("Call elevator failure!")
 
     def step(self):
-
-        is_Arrive = False
+        request = None
         if self.status.state == 0:
             # 停止状态
-            return self.status
+            pass
         elif self.status.state == 1:
             # 运行状态
             self.status.remaining_Time -= 1
@@ -73,7 +77,8 @@ class Elevator():
                     if self.stop_Task[self.layer] & (1 << 1) != 0:
                         self.button[self.layer] = False
                     if self.stop_Task[self.layer] & 1 != 0:
-                        is_Arrive = True
+                        request = self.Request[self.layer]
+                        del self.Request[self.layer]
                     del self.stop_Task[self.layer]
                     self.status.state = 2
                     self.status.remaining_Time = waiting_Time
@@ -87,7 +92,8 @@ class Elevator():
                 if self.stop_Task[self.layer] & (1 << 1) != 0:
                     self.button[self.layer] = False
                 if self.stop_Task[self.layer] & 1 != 0:
-                    is_Arrive = True
+                    request = self.Request[self.layer]
+                    del self.Request[self.layer]
                 del self.stop_Task[self.layer]
                 self.status.state = 2
                 self.status.remaining_Time = waiting_Time
@@ -109,7 +115,7 @@ class Elevator():
                 else:
                     # 如果时间没有流完，就什么都不干
                     pass
-        return is_Arrive
+        return request
 
     def button_Restoration(self):
         size = len(self.button)
@@ -181,8 +187,8 @@ class Elevator():
         if direction == None:
             if not isinstance(l, int) or l < min_Layer or l > max_Layer:
                 raise Exception("Invalid input!")
-            if l in self.stop_Task:
-                return False
+            # if l in self.stop_Task:
+            #     return False
             if self.status.state == 0:
                 return True
             elif self.status.state == 2:
