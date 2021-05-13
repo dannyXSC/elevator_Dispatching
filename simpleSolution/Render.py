@@ -533,13 +533,13 @@ def Building_Render(elevator_Number=default_Elevator_Number,
             raise Exception("Invalid input!")
 
     icon = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
+        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/smiling.png')
     elevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png',
+        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/elevator.png',
         (display_Elevator_Group_Elevator_Width,
          display_Elevator_Group_Elevator_Height))
     openedElevatorImg = load_img(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png',
+        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/opened_Elevator.png',
         (display_Elevator_Group_Elevator_Width,
          display_Elevator_Group_Elevator_Height))
 
@@ -729,7 +729,8 @@ def Building_Render(elevator_Number=default_Elevator_Number,
     #######################################################################
     def calFloorButtonPos():
         retPos = list()
-        Xstart = display_Elevator_Group_Elevator_Width * elevator_Number + display_Elevator_Group_Floor_Width + display_Floor_Button_Hmargin
+        Xstart = display_Elevator_Group_Elevator_Width * elevator_Number + \
+            display_Elevator_Group_Floor_Width + display_Floor_Button_Hmargin
         for i in range(Layer_Number):
             Ythis = screen_Height - (
                 i + 1
@@ -738,7 +739,7 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                            [
                                Xstart + display_Floor_Button_Width +
                                display_Floor_Button_Hmargin, Ythis
-                           ]])
+            ]])
         return retPos
 
     FloorButtonPos = calFloorButtonPos()
