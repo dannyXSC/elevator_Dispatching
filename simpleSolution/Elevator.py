@@ -203,12 +203,18 @@ class Elevator():
                     return False
             else:
                 if self.operation_Direction == 1:
-                    if l >= self.layer + min_Running_Distance:
+                    if l > self.layer or (
+                            l == self.layer and
+                        (self.status.remaining_Time == waiting_Time
+                         or self.status.remaining_Time == waiting_Time - 1)):
                         return True
                     else:
                         return False
                 elif self.operation_Direction == 2:
-                    if l <= self.layer - min_Running_Distance:
+                    if l < self.layer or (
+                            l == self.layer and
+                        (self.status.remaining_Time == waiting_Time
+                         or self.status.remaining_Time == waiting_Time - 1)):
                         return True
                     else:
                         return False
@@ -232,7 +238,10 @@ class Elevator():
                     return False
             else:
                 if self.operation_Direction == 1 and direction == 1:
-                    if l >= self.layer:
+                    if l > self.layer or (
+                            l == self.layer and
+                        (self.status.remaining_Time == waiting_Time
+                         or self.status.remaining_Time == waiting_Time - 1)):
                         if l in self.Request and self.Request[l].is_Up == False:
                             return False
                         else:
@@ -240,7 +249,10 @@ class Elevator():
                     else:
                         return False
                 elif self.operation_Direction == 2 and direction == 2:
-                    if l <= self.layer:
+                    if l < self.layer or (
+                            l == self.layer and
+                        (self.status.remaining_Time == waiting_Time
+                         or self.status.remaining_Time == waiting_Time - 1)):
                         if l in self.Request and self.Request[l].is_Up == True:
                             return False
                         else:
