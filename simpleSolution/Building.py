@@ -12,7 +12,6 @@ class Building():
 
     def step(self):
         self.distribute()
-        print(self.solving_Request)
         for elevator in self.elevators.list:
             request = elevator.step()
             if isinstance(request, Request):
@@ -37,22 +36,30 @@ class Building():
         complete_List = list()
         size = len(self.elevators.wait_Queue)
         picked = [False for i in range(size)]
+
         for i in range(size):
             layer = self.elevators.wait_Queue[i].layer
             is_Up = self.elevators.wait_Queue[i].is_Up
             direction = 1 if is_Up == True else 2
-            for elevator in self.elevators.list:
-                if picked[i] == False and elevator.can_Add_Task(
+            picked_Elevator = -1
+            min_Distance = len(self.layers)+5
+            # for elevator in self.elevators.list:
+            for j in range(len(self.elevators.list)):
+                if picked[i] == False and self.elevators.list[j].can_Add_Task(
                         layer, direction):
-                    if elevator.status.state == 0:
-                        elevator.call(layer, True,
-                                      self.elevators.wait_Queue[i])
-                    else:
-                        elevator.add_Stop_Task(layer, True,
-                                               self.elevators.wait_Queue[i])
-                    complete_List.append(self.elevators.wait_Queue[i])
-                    self.solving_Request.append(self.elevators.wait_Queue[i])
-                    picked[i] = True
+                    if min_Distance >= abs(self.elevators.list[j].layer-layer):
+                        picked_Elevator = j
+                        min_Distance = abs(self.elevators.list[j].layer-layer)
+            if picked_Elevator != -1:
+                if self.elevators.list[picked_Elevator].status.state == 0:
+                    self.elevators.list[picked_Elevator].call(layer, True,
+                                                              self.elevators.wait_Queue[i])
+                else:
+                    self.elevators.list[picked_Elevator].add_Stop_Task(layer, True,
+                                                                       self.elevators.wait_Queue[i])
+                complete_List.append(self.elevators.wait_Queue[i])
+                self.solving_Request.append(self.elevators.wait_Queue[i])
+                picked[i] = True
 
         try:
             for complete in complete_List:

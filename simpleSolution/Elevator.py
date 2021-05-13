@@ -64,28 +64,30 @@ class Elevator():
             pass
         elif self.status.state == 1:
             # 运行状态
-            self.status.remaining_Time -= 1
-            if self.status.remaining_Time < 0:
-                if self.operation_Direction == 2:
-                    self.layer -= 1
-                elif self.operation_Direction == 1:
-                    self.layer += 1
-                else:
-                    raise Exception("Status error!")
-                self.status.remaining_Time = velocity
-                if self.layer in self.stop_Task:
-                    if self.stop_Task[self.layer] & (1 << 1) != 0:
-                        self.button[self.layer] = False
-                    if self.stop_Task[self.layer] & 1 != 0:
-                        request = self.Request[self.layer]
-                        del self.Request[self.layer]
-                    del self.stop_Task[self.layer]
-                    self.status.state = 2
-                    self.status.remaining_Time = waiting_Time
-                    # operation_Direction不变
+            if self.layer in self.stop_Task:
+                if self.stop_Task[self.layer] & (1 << 1) != 0:
+                    self.button[self.layer] = False
+                if self.stop_Task[self.layer] & 1 != 0:
+                    request = self.Request[self.layer]
+                    del self.Request[self.layer]
+                del self.stop_Task[self.layer]
+                self.status.state = 2
+                self.status.remaining_Time = waiting_Time
             else:
-                # 如果时间没有流完，就什么都不干
-                pass
+                self.status.remaining_Time -= 1
+                if self.status.remaining_Time < 0:
+                    if self.operation_Direction == 2:
+                        self.layer -= 1
+                    elif self.operation_Direction == 1:
+                        self.layer += 1
+                    else:
+                        raise Exception("Status error!")
+                    self.status.remaining_Time = velocity
+
+                    # operation_Direction不变
+                else:
+                    # 如果时间没有流完，就什么都不干
+                    pass
         else:
             # 中停状态
             if self.layer in self.stop_Task:
@@ -230,13 +232,19 @@ class Elevator():
                     return False
             else:
                 if self.operation_Direction == 1 and direction == 1:
-                    if l >= self.layer + min_Running_Distance:
-                        return True
+                    if l >= self.layer:
+                        if l in self.Request and self.Request[l].is_Up == False:
+                            return False
+                        else:
+                            return True
                     else:
                         return False
                 elif self.operation_Direction == 2 and direction == 2:
-                    if l <= self.layer - min_Running_Distance:
-                        return True
+                    if l <= self.layer:
+                        if l in self.Request and self.Request[l].is_Up == True:
+                            return False
+                        else:
+                            return True
                     else:
                         return False
                 else:
