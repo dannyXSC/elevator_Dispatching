@@ -1,3 +1,25 @@
+# readme
+
+## 使用方式
+
+```terminal
+cd simpleSolution
+python Render.py
+```
+
+## 调试方式
+
+显示界面的参数都存在/simpleSolution/Global.py里
+
+1. 更改窗口比例
+
+>Global.py里的scale
+
+
+
+## 类设计
+
+```
 - unit_Interval: int        #单位时间
 - velocity: int             #几个单位时间移动一层
 - waiting_Time: int         #在每个楼层停留多少单位时间
@@ -49,43 +71,7 @@ Building
 - layers: [Floor]
 - elevators: Elevator_List
 
-Listener?
+```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Description 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-- 我认为一个人在一个楼层按了上行或者下行键，对于电梯组来说，就是要派一个电梯到这一楼。
-  所以设计了target_layer，表示这个电梯最终要到达的位置。
-  - 那比如现在电梯在10楼，有人在2楼按了电梯，这个时候电梯的target_layer就改成了2。此时，
-    如果有人在电梯里按了1，我认为这个时候电梯的target_layer就==不应该==变为1。
-  - 也就是说，我暂时不接受interrupt
-- 但是我的类的设计实际上不用考虑这些东西，我只需要考虑清楚，有关内容是否都存上了。
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-- 运行的方向不能随意更改
-- 如果当前在运行状态：
-    如果碰到需要等待的楼层：停下，状态变成2，等待时间复位
-    如果不是：继续运行
-- 如果当前在等待状态（如果一个命令结束，那么它的前一个状态一定是等待状态）：
