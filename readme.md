@@ -2,9 +2,10 @@
 
 ## 使用方式
 
+### 首先进入工作目录
+
 ```terminal
 cd simpleSolution
-python Render.py
 ```
 
 ## 调试方式
@@ -13,9 +14,33 @@ python Render.py
 
 1. 更改窗口比例
 
->Global.py里的scale
+>通过更改Global.py里的scale来调整
+>
+>表示变成标准大小的1/scale倍
 
+2. 更改楼层数
 
+   > 通过更改Global.py里的max_Layer来调整
+
+3. 更改电梯速度
+
+   > 通过更改Global.py里的velocity来调整
+   >
+   > 表示几个单位时间移动一层
+
+4. 更改开门时间
+
+   > 通过更改Global.py里的waiting_Time来调整
+   >
+   > 表示停留几个单位时间
+
+5. 更改电梯数目
+
+   > 通过更改Global.py里的default_Elevator_Number来调整
+
+6. 更改每个显示东西的大小
+
+   > 下面的其他变量即可
 
 ## 类设计
 

@@ -14,7 +14,7 @@ default_Elevator_Number = 5
 min_Running_Distance = 2
 
 # scale 变成标准大小的1/scale
-scale = 1
+scale = 2
 
 # display setting
 # screen
