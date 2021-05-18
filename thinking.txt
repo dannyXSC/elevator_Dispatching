@@ -89,3 +89,25 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     如果碰到需要等待的楼层：停下，状态变成2，等待时间复位
     如果不是：继续运行
 - 如果当前在等待状态（如果一个命令结束，那么它的前一个状态一定是等待状态）：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+调度算法思考：
+- 我的第一版做的是从最左边的电梯到最右边的电梯循环，看这个电梯可不可以接这个任务
+  如果可以接，那么就接这个任务。

@@ -17,15 +17,11 @@ def Single_Elevator_Render():
     screen_Height = max_Layer * display_elevator_Height
     screen = pygame.display.set_mode((screen_Width, screen_Height))
     pygame.display.set_caption("Elevator")
-    icon = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\smiling.png')
+    icon = pygame.image.load(r'.\img\smiling.png')
     pygame.display.set_icon(icon)
 
-    elevatorImg = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\elevator.png')
-    openedElevatorImg = pygame.image.load(
-        r'D:\Project\elevator_Dispatching\simpleSolution\img\opened_Elevator.png'
-    )
+    elevatorImg = pygame.image.load(r'.\img\elevator.png')
+    openedElevatorImg = pygame.image.load(r'.\img\opened_Elevator.png')
     elevatorImg = pygame.transform.scale(
         elevatorImg, (display_elevator_Width, display_elevator_Height))
     openedElevatorImg = pygame.transform.scale(
@@ -241,16 +237,13 @@ def Elevator_Group_Render(elevator_Number=default_Elevator_Number,
         else:
             raise Exception("Invalid input!")
 
-    icon = load_img(
-        r'./img/smiling.png')
-    elevatorImg = load_img(
-        r'./img/elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
-    openedElevatorImg = load_img(
-        r'./img/opened_Elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
+    icon = load_img(r'.\img\smiling.png')
+    elevatorImg = load_img(r'.\img\elevator.png',
+                           (display_Elevator_Group_Elevator_Width,
+                            display_Elevator_Group_Elevator_Height))
+    openedElevatorImg = load_img(r'.\img\opened_Elevator.png',
+                                 (display_Elevator_Group_Elevator_Width,
+                                  display_Elevator_Group_Elevator_Height))
 
     pygame.display.set_icon(icon)
 
@@ -532,23 +525,28 @@ def Building_Render(elevator_Number=default_Elevator_Number,
         else:
             raise Exception("Invalid input!")
 
-    icon = load_img(
-        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/smiling.png')
-    elevatorImg = load_img(
-        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
-    openedElevatorImg = load_img(
-        r'/Users/xiesicheng/Desktop/project/elevator_Dispatching/simpleSolution/img/opened_Elevator.png',
-        (display_Elevator_Group_Elevator_Width,
-         display_Elevator_Group_Elevator_Height))
+    icon = load_img(r'.\img\smiling.png')
+    elevatorImg = load_img(r'.\img\elevator.png',
+                           (display_Elevator_Group_Elevator_Width,
+                            display_Elevator_Group_Elevator_Height))
+    openedElevatorImg = load_img(r'.\img\opened_Elevator.png',
+                                 (display_Elevator_Group_Elevator_Width,
+                                  display_Elevator_Group_Elevator_Height))
 
     pygame.display.set_icon(icon)
 
     #######################################################################
     # 文字导入
     #######################################################################
-    def show_Text(content, x, y, fc, bc, w, h, size=30, font='Comic Sans MS'):
+    def show_Text(content,
+                  x,
+                  y,
+                  fc,
+                  bc,
+                  w,
+                  h,
+                  size=display_Elevator_Button_Font_Size,
+                  font='Comic Sans MS'):
         myfont = pygame.font.SysFont(font, size)
         text = myfont.render(content, False, fc)
         text_surface = pygame.Surface((w, h))
@@ -722,7 +720,8 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                       Ystart + display_Elevator_Group_Floor_Height / 4,
                       (255, 255, 255), (0, 0, 0),
                       display_Elevator_Group_Floor_Width / 2,
-                      display_Elevator_Group_Floor_Height / 2, 15)
+                      display_Elevator_Group_Floor_Height / 2,
+                      display_Elevator_Button_Font_Size//2)
 
     #######################################################################
     # 计算楼层的按钮的位置 ↑ ↓
@@ -739,7 +738,7 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                            [
                                Xstart + display_Floor_Button_Width +
                                display_Floor_Button_Hmargin, Ythis
-            ]])
+                           ]])
         return retPos
 
     FloorButtonPos = calFloorButtonPos()
@@ -749,13 +748,15 @@ def Building_Render(elevator_Number=default_Elevator_Number,
     #######################################################################
     def showFloorButton(active_List):
         for i in range(Layer_Number):
-            if i != Layer_Number-1:
-                showButton("^", FloorButtonPos[i][0][0], FloorButtonPos[i][0][1],
-                           active_List[i][0], display_Floor_Button_Width,
+            if i != Layer_Number - 1:
+                showButton("^", FloorButtonPos[i][0][0],
+                           FloorButtonPos[i][0][1], active_List[i][0],
+                           display_Floor_Button_Width,
                            display_Floor_Button_Height)
             if i != 0:
-                showButton("v", FloorButtonPos[i][1][0], FloorButtonPos[i][1][1],
-                           active_List[i][1], display_Floor_Button_Width,
+                showButton("v", FloorButtonPos[i][1][0],
+                           FloorButtonPos[i][1][1], active_List[i][1],
+                           display_Floor_Button_Width,
                            display_Floor_Button_Height)
 
     #######################################################################
@@ -828,21 +829,23 @@ def Building_Render(elevator_Number=default_Elevator_Number,
                     if flag == 0:
                         # 监听楼层按钮
                         for i in range(Layer_Number):
-                            if i != Layer_Number-1 and ifClickButton(cursorsPos[0], cursorsPos[1],
-                                                                     FloorButtonPos[i][0][0],
-                                                                     FloorButtonPos[i][0][1],
-                                                                     display_Floor_Button_Width,
-                                                                     display_Floor_Button_Height):
+                            if i != Layer_Number - 1 and ifClickButton(
+                                    cursorsPos[0], cursorsPos[1],
+                                    FloorButtonPos[i][0][0],
+                                    FloorButtonPos[i][0][1],
+                                    display_Floor_Button_Width,
+                                    display_Floor_Button_Height):
                                 buildingHandle.layers[i].up_Button_State = True
                                 buildingHandle.add_Request(Request(
                                     i + 1, True))
                                 flag = 1
                                 break
-                            elif i != 0 and ifClickButton(cursorsPos[0], cursorsPos[1],
-                                                          FloorButtonPos[i][1][0],
-                                                          FloorButtonPos[i][1][1],
-                                                          display_Floor_Button_Width,
-                                                          display_Floor_Button_Height):
+                            elif i != 0 and ifClickButton(
+                                    cursorsPos[0], cursorsPos[1],
+                                    FloorButtonPos[i][1][0],
+                                    FloorButtonPos[i][1][1],
+                                    display_Floor_Button_Width,
+                                    display_Floor_Button_Height):
                                 buildingHandle.layers[
                                     i].down_Button_State = True
                                 buildingHandle.add_Request(
