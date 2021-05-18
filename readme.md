@@ -8,6 +8,30 @@
 cd simpleSolution
 ```
 
+### 单个电梯
+
+```terminal
+python SingleElevatorRender.py
+```
+
+![image-20210518145201295](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145201295.png)
+
+### 多个电梯
+
+```terminal
+python ElevatorGroupRender.py
+```
+
+![image-20210518145431488](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145431488.png)
+
+### 整栋楼的调度
+
+```
+python BuildingRender.py
+```
+
+![image-20210518145630490](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145630490.png)
+
 ## 调试方式
 
 显示界面的参数都存在/simpleSolution/Global.py里
@@ -98,5 +122,17 @@ Building
 
 ```
 
+## 调度设计
 
+### 最简单的调度方式
+
+> 哪个电梯有空，就让哪个电梯来
+
+### 优化后的调度方式
+
+> 对于每个楼层的任务，选择一个有空最近的电梯去接
+
+### 认为还可以继续优化的方式
+
+> 加入中断机制，在每一个单位时间，判断当前有空的电梯是否比当前正在运行的电梯位置更优，如果是，就中断正在运行的电梯，让更优的电梯去接。
 
