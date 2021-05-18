@@ -14,7 +14,7 @@ cd simpleSolution
 python SingleElevatorRender.py
 ```
 
-![image-20210518145201295](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145201295.png)
+![image-20210518145201295](./img/image-20210518145201295.png)
 
 ### 多个电梯
 
@@ -22,7 +22,7 @@ python SingleElevatorRender.py
 python ElevatorGroupRender.py
 ```
 
-![image-20210518145431488](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145431488.png)
+![image-20210518145431488](./img/image-20210518145431488.png)
 
 ### 整栋楼的调度
 
@@ -30,7 +30,7 @@ python ElevatorGroupRender.py
 python BuildingRender.py
 ```
 
-![image-20210518145630490](/Users/xiesicheng/Library/Application Support/typora-user-images/image-20210518145630490.png)
+![image-20210518145630490](./img/image-20210518145630490.png)
 
 ## 调试方式
 
